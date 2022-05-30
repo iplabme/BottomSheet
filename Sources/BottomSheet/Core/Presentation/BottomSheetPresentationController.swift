@@ -68,7 +68,7 @@ public final class BottomSheetPresentationController: UIPresentationController {
     private var interactionController: UIPercentDrivenInteractiveTransition?
 
     public var shadingView: UIView?
-    public var pullBar: PullBar?
+    public var pullBar: BottomSheetNavigationPullBar?
 
     private weak var trackedScrollView: UIScrollView?
 
@@ -281,9 +281,9 @@ public final class BottomSheetPresentationController: UIPresentationController {
         containerView.addSubview(shadingView)
         shadingView.frame = containerView.bounds
 
-        let pullBar = PullBar()
-        pullBar.frame.size = CGSize(width: containerView.frame.width, height: Style.pullBarHeight)
-        containerView.addSubview(pullBar)
+//        let pullBar = BottomSheetNavigationPullBar()
+//        pullBar.frame.size = CGSize(width: containerView.frame.width, height: Style.pullBarHeight)
+//        containerView.addSubview(pullBar)
 
         let tapGesture = UITapGestureRecognizer()
         shadingView.addGestureRecognizer(tapGesture)
@@ -291,7 +291,7 @@ public final class BottomSheetPresentationController: UIPresentationController {
         tapGesture.addTarget(self, action: #selector(handleShadingViewTapGesture))
 
         self.shadingView = shadingView
-        self.pullBar = pullBar
+//        self.pullBar = pullBar
     }
     
     @objc
@@ -302,8 +302,8 @@ public final class BottomSheetPresentationController: UIPresentationController {
     private func removeSubviews() {
         shadingView?.removeFromSuperview()
         shadingView = nil
-        pullBar?.removeFromSuperview()
-        pullBar = nil
+//        pullBar?.removeFromSuperview()
+//        pullBar = nil
     }
 
     private func targetFrameForPresentedView() -> CGRect {

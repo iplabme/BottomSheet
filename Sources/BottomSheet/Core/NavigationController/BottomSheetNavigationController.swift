@@ -7,10 +7,23 @@
 //
 
 import UIKit
+import SnapKit
 
 public final class BottomSheetNavigationController: UINavigationController {
+    // MARK: - Public properties
+    public var pullBarColor: UIColor? {
+        didSet {
+            pullBar.color = pullBarColor
+        }
+    }
+    
     // MARK: - Private properties
-
+    private lazy var pullBar:  BottomSheetNavigationPullBar = {
+        let bar = BottomSheetNavigationPullBar()
+        bar.frame.size = CGSize(width: view.frame.width, height: 10)
+        return bar
+    }()
+    
     private var isUpdatingNavigationStack = false
 
     private var canAnimatePreferredContentSizeUpdates = false
@@ -26,6 +39,12 @@ public final class BottomSheetNavigationController: UINavigationController {
 
         view.clipsToBounds = true
         view.backgroundColor = .white.withAlphaComponent(0.6)
+
+        view.addSubview(pullBar)
+        pullBar.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.top.equalToSuperview().inset(10)
+        }
 
         modalPresentationStyle = .custom
     }
