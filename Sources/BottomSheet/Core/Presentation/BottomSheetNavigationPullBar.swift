@@ -8,40 +8,49 @@
 
 import UIKit
 
-public extension BottomSheetPresentationController {
-    final class PullBar: UIView {
-        enum Style {
-            static let size = CGSize(width: 40, height: 4)
+public class BottomSheetNavigationPullBar: UIView {
+    enum Style {
+        static var size = CGSize(width: 40, height: 4)
+        static var color = UIColor.lightGray
+    }
+    
+    var color: UIColor? {
+        didSet {
+            updateStyle()
         }
+    }
+    
+    private func updateStyle() {
+        centerView.backgroundColor = color ?? Style.color
+    }
+    
+    private let centerView: UIView = {
+        let view = UIView()
+        view.frame.size = Style.size
+        view.backgroundColor = Style.color
+        view.layer.cornerRadius = Style.size.height * 0.5
+        return view
+    }()
 
-        private let centerView: UIView = {
-            let view = UIView()
-            view.frame.size = Style.size
-            view.backgroundColor = UIColor.white.withAlphaComponent(0.6)
-            view.layer.cornerRadius = Style.size.height * 0.5
-            return view
-        }()
+    public init() {
+        super.init(frame: .zero)
+        
+        backgroundColor = .clear
+        
+        setupSubviews()
+    }
 
-        init() {
-            super.init(frame: .zero)
+    required init?(coder: NSCoder) {
+        preconditionFailure("init(coder:) has not been implemented")
+    }
 
-            backgroundColor = .clear
+    private func setupSubviews() {
+        addSubview(centerView)
+    }
 
-            setupSubviews()
-        }
+    public override func layoutSubviews() {
+        super.layoutSubviews()
 
-        required init?(coder: NSCoder) {
-            preconditionFailure("init(coder:) has not been implemented")
-        }
-
-        private func setupSubviews() {
-            addSubview(centerView)
-        }
-
-        public override func layoutSubviews() {
-            super.layoutSubviews()
-
-            centerView.center = bounds.center
-        }
+        centerView.center = bounds.center
     }
 }
