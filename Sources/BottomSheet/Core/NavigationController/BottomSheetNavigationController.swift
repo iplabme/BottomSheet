@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SnapKit
 
 public final class BottomSheetNavigationController: UINavigationController {
     // MARK: - Public properties
@@ -41,10 +40,9 @@ public final class BottomSheetNavigationController: UINavigationController {
         view.backgroundColor = .white.withAlphaComponent(0.6)
 
         view.addSubview(pullBar)
-        pullBar.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.top.equalToSuperview().inset(10)
-        }
+        pullBar.translatesAutoresizingMaskIntoConstraints = false
+        pullBar.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        pullBar.topAnchor.constraint(equalTo: view.topAnchor, constant: 8).isActive = true
 
         modalPresentationStyle = .custom
     }
