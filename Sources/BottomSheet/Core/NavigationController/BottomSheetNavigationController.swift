@@ -42,7 +42,7 @@ public final class BottomSheetNavigationController: UINavigationController {
         view.addSubview(pullBar)
         pullBar.translatesAutoresizingMaskIntoConstraints = false
         pullBar.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        pullBar.topAnchor.constraint(equalTo: view.topAnchor, constant: 8).isActive = true
+        pullBar.topAnchor.constraint(equalTo: view.topAnchor, constant: 10).isActive = true
 
         modalPresentationStyle = .custom
     }
